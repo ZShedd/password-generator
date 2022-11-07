@@ -1,6 +1,6 @@
 # Password Generator
 
-//! READ.ME//
+// README//
 
 GIVEN I need a new, secure password
 WHEN I click the button to generate a password
@@ -18,5 +18,6 @@ THEN a password is generated that matches the selected criteria
 WHEN the password is generated
 THEN the password is either displayed in an alert or written to the page
 
+https://zshedd.github.io/password-generator/
 
 ![image](https://user-images.githubusercontent.com/116223460/200246166-b8086106-f2be-4a21-bbc6-6ee53e300c94.png)
