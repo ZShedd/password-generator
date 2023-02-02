@@ -13,7 +13,7 @@ var hasSpecial = confirm("Would you like special characters in your password?")
 // Password Generator Functions
 var generateBtn = document.querySelector("#generate");
 function generatePassword() {
-  var passwordOptions = [];
+    var passwordOptions = [];
   var finalPassword = [];
   var length = prompt("How many characters would you like in your password?")
   console.log(length) }
@@ -21,6 +21,7 @@ function generatePassword() {
     alert("Please enter a password between 8-128 characters.")
     return;
   }
+
 // If statements
   if (hasLower === true) {
     passwordOptions = passwordOptions.concat(lower);
@@ -37,4 +38,13 @@ function generatePassword() {
     finalPassword.push(number[Math.floor(Math.random() * number.length)]);
     length--;
   }
+
+  // Generate password into #password input
+function writePassword() {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+  }
   
+  // Button Generator
+  generateBtn.addEventListener("click", writePassword);
