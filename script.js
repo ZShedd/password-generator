@@ -16,3 +16,13 @@ function generatePassword() {
     alert("Please enter a password between 8-128 characters.")
     return;
   }
+// Special options and true statements
+  var hasLower = confirm("Would you like lower case letters in your password?")
+  var hasUpper = confirm("Would you like upper case letters in your password?")
+  var hasNumbers = confirm("Would you like numbers in your password?")
+  var hasSpecial = confirm("Would you like special characters in your password?")
+  if (hasLower === true) {
+    passwordOptions = passwordOptions.concat(lower);
+    finalPassword.push(lower[Math.floor(Math.random() * lower.length)]);
+    length--;
+  }
