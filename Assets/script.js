@@ -1,55 +1,145 @@
-
-// Character options
-var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*_-+=";
-var lower = ["a", "b", "c", "d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-var upper = ["A", "B", "C", "D", "E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-var integer = ["0","1", "2", "3", "4","5","6","7","8","9"];
-var special = ["!", "@", "#", "$","%","&","'","(",")","*","+","=",",","-",".","/",":",";","<",">","?","[","]","^","_","{","}","|","`","~"];
-//Confirmation Variables
-var hasLower = confirm("Would you like lower case letters in your password?")
-var hasUpper = confirm("Would you like upper case letters in your password?")
-var hasNumbers = confirm("Would you like numbers in your password?")
-var hasSpecial = confirm("Would you like special characters in your password?")
-
-// Password Generator Functions
-var generateBtn = document.querySelector("#generate");
-function generatePassword() {
-    var passwordOptions = [];
-  var finalPassword = [];
-  var length = prompt("How many characters would you like in your password?")
-  console.log(length) }
-  if (length < 8 || length > 128) {
-    alert("Please enter a password between 8-128 characters.")
-    return;
-  }
-
-// If statements
-  if (hasLower === true) {
-    passwordOptions = passwordOptions.concat(lower);
-    finalPassword.push(lower[Math.floor(Math.random() * lower.length)]);
-    length--;
-  }
-  if (hasUpper === true) {
-    passwordOptions = passwordOptions.concat(upper);
-    finalPassword.push(upper[Math.floor(Math.random() * upper.length)]);
-    length--;
-  }
-  if (hasNumbers === true) {
-    passwordOptions = passwordOptions.concat(number);
-    finalPassword.push(number[Math.floor(Math.random() * number.length)]);
-    length--;
-  }
-
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
+function checkYesOrNo(prompt) {
+  let cleanedPrompt = prompt.toUpperCase();
+
+  if (cleanedPrompt === "Y" || cleanedPrompt === "N") { 
+    return cleanedPrompt;
+  } else {
+    window.alert("Please enter either a Y or N response.");
+  }
+}
+
+function includeCapitals() {
+  let capital = prompt("Would you like to include capital letters? Y/N");
+
+  if (!(capital == "Y" || capital == "N")) { 
+    let cleanedCapital = checkYesOrNo(capital)
+    if (!cleanedCapital) {
+      includeCapitals();
+    }
+    return cleanedCapital;
+  }
+
+  return capital;
+}
+
+function includeLowerCase() {
+  let lowerCase = prompt("Would you like to include lower case letters? Y/N");
+
+  if (!(lowerCase == "Y" || lowerCase == "N")) { 
+    let cleanedLowerCase = checkYesOrNo(lowerCase)
+    if (!cleanedLowerCase) {
+      includeLowerCase();
+    }
+    return cleanedLowerCase;
+  }
+
+  return lowerCase;
+}
+
+function includeNumbers() {
+  let numbers = prompt("Would you like to include numbers letters? Y/N");
+
+  if (!(numbers == "Y" || numbers == "N")) { 
+    let cleanedNumbers = checkYesOrNo(numbers)
+    if (!cleanedNumbers) {
+      includeCapitals();
+    }
+    return cleanedNumbers;
+  }
+
+  return numbers;
+}
+
+function includeSpecialCharacters() {
+  let specialCharacters = prompt("Would you like to include special characters? Y/N");
+
+  if (!(specialCharacters == "Y" || specialCharacters == "N")) { 
+    let cleanedSpecialCharacters = checkYesOrNo(specialCharacters)
+    if (!specialCharacters) {
+      includeSpecialCharacters();
+    }
+    return cleanedSpecialCharacters;
+  }
+
+  return specialCharacters;
+}
+
+function lengthPrompt() {
+  var length = prompt("How many characters do you want to generate? Minimum 8 characters, maximum 128.");
+  let passwordLength;
+
+  if (length == null) {
+    return null;
+  } else {
+    passwordLength = Number(length);
+  }
+
+  if (passwordLength < 8) {
+    window.alert("That length is too short. Minimum length is 8. Please try again.");
+    lengthPrompt();
+  } else if (passwordLength > 128) {
+    window.alert("That length is too long. Maximum length is 128. Please try again.");
+    lengthPrompt();
+  }
+
+  return passwordLength;
+}
+
+function generateCharacters(characters) {
+  let randomChar = Math.floor(Math.random() * characters.length);
+  return characters[randomChar];
+}
+
+function generatePassword() {
+  let password = '';
+  let length = lengthPrompt();
+  let capitals = includeCapitals();
+  let lowerCase = includeLowerCase();
+  let numbers = includeNumbers();
+  let specialCharacters = includeSpecialCharacters();
+  
+  let lowerAlphabet = 'abcdefghijklmnopqrstuvwxyz';
+  let upperCaseAlphabet = lowerAlphabet.toUpperCase();
+  let numberValue = '123456789';
+  let specialCharList = '!"#$%&()*+,-./:;<=>?@[]^_`{|}~'
+
+  for (let i = 0; i < length; i++) {
+    let randCharPlaceholder = '';
+    if (capitals === "Y") {
+      let capitalCharacters = generateCharacters(upperCaseAlphabet)
+      randCharPlaceholder += capitalCharacters;
+    }
+
+    if (lowerCase === "Y") {
+      let lowerCaseCharacters = generateCharacters(lowerAlphabet)
+      randCharPlaceholder += lowerCaseCharacters;
+    }
+    
+    if (numbers === "Y") {
+      let numberCharacters = generateCharacters(numberValue)
+      randCharPlaceholder += numberCharacters;
+    }
+    
+    if (specialCharacters === "Y") {
+      let specialChar = generateCharacters(specialCharList)
+      randCharPlaceholder += specialChar;
+    } 
+    
+    let randomChar = Math.floor(Math.random() * randCharPlaceholder.length)
+    password += randCharPlaceholder[randomChar];
+  }
+
+  return password;
+}
+
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  let password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
