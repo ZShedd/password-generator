@@ -1,23 +1,14 @@
 # Password Generator
 
-// README//
+## Description 
+A handy app to create unique passwords on the fly!
+Simply tell the system what you need and POP! it is made!
+This webapp is built utilizing CSS, JavaScript, and HTML.
 
-GIVEN I need a new, secure password
-WHEN I click the button to generate a password
-THEN I am presented with a series of prompts for password criteria
-WHEN prompted for password criteria
-THEN I select which criteria to include in the password
-WHEN prompted for the length of the password
-THEN I choose a length of at least 8 characters and no more than 128 characters
-WHEN asked for character types to include in the password
-THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-WHEN I answer each prompt
-THEN my input should be validated and at least one character type should be selected
-WHEN all prompts are answered
-THEN a password is generated that matches the selected criteria
-WHEN the password is generated
-THEN the password is either displayed in an alert or written to the page
+## Installation 
+No Installation required, just click the link in Usage.
 
+## Usage 
 https://zshedd.github.io/password-generator/
 
-![image](https://user-images.githubusercontent.com/116223460/200246166-b8086106-f2be-4a21-bbc6-6ee53e300c94.png)
+![image](https://user-images.githubusercontent.com/116223460/231214466-f98b1a8a-279b-40b5-8a8e-1302f8094575.png)
